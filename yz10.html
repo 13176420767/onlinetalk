@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        #loginForm {
+            border: 1px solid #ccc;
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        #loginForm input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #loginButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #welcome{
+
+        text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loginForm">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button id="loginButton" onclick="login()">Login</button>
+    </div>
+    <div id="welcome">
+       <span style="color: red;"> 须知：</span>
+        <br>
+             1. 欢迎参加在线实验，本次实验的目的是研究在既定情境下大学生动态时会得到什么样的评论；
+        <br> 2. 您的任务是在给定的情境下其他参与者发布的动态进行评论
+        <br> 3. <span style="color: red;">特别说明：</span>
+        <br>     （1）在实验任务期间，其他参与者会看到你的评论并对你的评论进行点赞或再评论；
+        <br>     （2）我们不会泄露任何关于你的信息，实验完成后网站会被重置，删除所有信息，我们只保留在此次实验中出现次数多的关键词。
+    </div>
+    <script>
+    var accounts = [
+        { username: "15864478208", password: "123456" },
+         { username: "15864478775", password: "123456" }
+    ];
+
+    function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        var validCredentials = false;
+        for (var i = 0; i < accounts.length; i++) {
+            if (username === accounts[i].username && password === accounts[i].password) {
+                validCredentials = true;
+                break;
+            }
+        }
+
+        if (validCredentials) {
+            window.location.href = "DGJN11.html";
+        } else {
+            alert("Invalid username or password. Please try again.");
+        }
+    }
+</script>
+
+</body>
+</html>

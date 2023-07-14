@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>在线社交平台</title>
+    <style>
+         body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            text-align: left;
+
+        }
+
+        #photo {
+
+            width: 750px;
+            height: 500px; /* 设置为所需的固定高度 */
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border: 2px dashed lightgray;
+            padding: 20px;
+            flex-direction: column;
+            overflow: hidden; /* 隐藏超出容器高度的部分 */
+        }
+
+        #selectBtn {
+            width: 150px;
+            height: 50px;
+            font-size: 24px;
+            background-color: lightgreen;
+            color: #fff;
+            border: none;
+            margin-left: -600px;
+        }
+
+        #selectBtn:hover {
+            background-color: gray;
+        }
+
+        #purpose {
+            width: 100%;
+            height: 50px;
+            font-size: 48px;
+            border: none;
+            resize: none;
+            background-color: transparent;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        .image-wrapper {
+            display: flex;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .image-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* 保持图片原有比例，不拉伸变形 */
+        }
+
+        #imageContainer {
+            border: none;
+            margin-bottom: 0px;
+            width: 770px;
+            height: 700px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-wrap: wrap; /* 当图片数量超过容器宽度时换行 */
+            flex-direction: row; /* 添加这一行 */
+            overflow-y: auto; /* 启用垂直滚动条 */
+        }
+
+        #message {
+            margin-bottom: 20px;
+        }
+
+        #button {
+            width: 150px;
+            height: 50px;
+            font-size: 24px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+        }
+
+        #button:hover {
+            background-color: #45a049;
+        }
+
+        #errorMsg {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    <div style="text-indent: 0;font-size: 40px; font-weight: normal;">
+        请根据以下情景，编辑一条动态并在社交平台发布（点击左下角选择文件添加图片）
+    </div>
+    <div style="text-indent: 2em;font-size: 36px; font-weight: bold;color: blue;">
+        发布一条动态来表达自己对于标准、要求和期望的高度，对自己和他人要求的严格。
+    </div>
+</h1>
+
+<!-- 图片 -->
+<div id="photo">
+    <!-- 文本输入框 -->
+    <textarea id="purpose" placeholder="这一刻想法..." style="width: 100%; height: 100%;"></textarea>
+    <div id="imageContainer"></div>
+</div>
+
+<!-- 添加图片按钮 -->
+<button id="selectBtn" onclick="selectPhoto()">选择文件</button>
+
+<!-- 等待提示 -->
+<div id="message"></div>
+
+<!-- 错误消息 -->
+<div id="errorMsg"></div>
+
+<!-- 发布按钮 -->
+<button id="button" onclick="goToNextPage()">发布</button>
+
+<script>
+    var selectedPhotos = []; // 保存用户选择的照片文件
+
+    function goToNextPage() {
+        // 获取右侧文本框的内容
+        var purposeContent = document.getElementById("purpose").value;
+
+        // 检查右侧文本框内容是否少于3个字
+        if (purposeContent.length < 3) {
+            var errorMsgElement = document.getElementById("errorMsg");
+            errorMsgElement.textContent = "请输入3个字以上";
+            return; // 终止函数继续执行
+        }
+
+        // 清空错误消息
+        var errorMsgElement = document.getElementById("errorMsg");
+        errorMsgElement.textContent = "";
+
+        // 显示等待提示文字
+        var messageElement = document.getElementById("message");
+        messageElement.textContent = "正在上传动态";
+
+        // 延时跳转到第二个页面
+        setTimeout(function () {
+            // 跳转到第二个页面，同时传递文本框的内容和选择的照片
+
+            var url =
+                "GGXN42.html?purpose=" +
+                encodeURIComponent(purposeContent);
+            window.location.href = url;
+        }, 2000); // 2000毫秒 = 2秒
+    }
+
+    function selectPhoto() {
+        // 创建一个input元素
+        var input = document.createElement("input");
+        input.type = "file"; // 设置input的类型为文件选择
+        input.accept = "image/*"; // 限制只能选择图像文件
+        input.onchange = handlePhotoSelection; // 绑定文件选择变化的处理函数
+
+        // 触发点击操作，选择图片
+        input.click();
+    }
+
+    function handlePhotoSelection(event) {
+        var file = event.target.files[0]; // 获取选中的图片文件
+
+        // 创建一个 FileReader 对象来读取文件内容
+        var reader = new FileReader();
+
+        // 定义读取完成的回调函数
+        reader.onload = function (e) {
+            // 创建一个图片元素并设置其属性
+            var img = document.createElement("img");
+            img.src = e.target.result;
+            img.alt = "照片";
+
+            // 创建一个包裹图片的div
+            var imageWrapper = document.createElement("div");
+            imageWrapper.className = "image-wrapper";
+            imageWrapper.appendChild(img);
+
+            // 将包裹图片的div添加到图片容器中
+            var imageContainer = document.getElementById("imageContainer");
+            imageContainer.appendChild(imageWrapper);
+
+            // 保存选择的照片文件
+            selectedPhotos.push(e.target.result);
+        };
+
+        // 读取文件内容
+        reader.readAsDataURL(file);
+    }
+</script>
+</body>
+</html>

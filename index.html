@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>在线社交平台</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden; /* 隐藏滚动条 */
+        }
+
+        h1 {
+            font-size: 72px; /* 放大3倍 */
+            color: red; /* 设置颜色为红色 */
+            margin-top: 10vh; /* 调整上方间距 */
+            margin-bottom: 5vh; /* 调整下方间距 */
+            text-align: center; /* 居中对齐文本 */
+        }
+
+        #welcome {
+            font-size: 24px;
+            margin-bottom: 3vh;
+            text-align: center; /* 居中对齐文本 */
+        }
+
+        #button {
+            width: 150px;
+            height: 50px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>济南大学在线社交平台</h1>
+
+    <button id="button" onclick="goToIndexPage()">开始</button>
+
+    <script>
+        function goToIndexPage() {
+            window.location.href = "xzrw.html";
+        }
+    </script>
+</body>
+</html>
