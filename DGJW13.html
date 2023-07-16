@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>在线社交平台</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+
+
+        #purposeContainer {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #f2f2f2;
+            width: calc(6.2/4 * 100%); /* 计算宽度 */
+            box-sizing: border-box;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            margin-bottom:-10px; /* 增加下边距 */
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin-top: -100px;
+        }
+        #comments {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            margin-top: -200px;
+        }
+         #comments li:nth-of-type(1),
+        #comments li:nth-of-type(2) {
+            font-weight: bold; /* 加粗前两行 */
+        }
+
+        #comments li {
+            margin-bottom: 10px;
+            text-align: left;
+            position: relative;
+            padding-left: 20px;
+            color: black; /* 将评论文本颜色设为红色 */
+            font-size: 1.5em; /* 将评论字体大小设为1.5倍 */
+            margin-top: 0px;
+        }
+
+        #comments li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 10px;
+            height: 100%;
+        }
+
+        #continueButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: -200px;
+
+        }
+
+        #continueButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- 帖子容器 -->
+    <div id="postContainer">
+        <!-- 文字描述 -->
+        <div id="textContainer">
+            <!-- 使用JavaScript获取URL参数并将其作为文本内容 -->
+            <script>
+                // 获取URL参数
+                function getParameterByName(name, url) {
+                    if (!url) url = window.location.href;
+                    name = name.replace(/[\[\]]/g, '\\$&');
+                    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                        results = regex.exec(url);
+                    if (!results) return null;
+                    if (!results[2]) return '';
+                    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+                }
+
+                // 获取text参数的值
+                var purpose = getParameterByName('purpose');
+
+                // 显示text参数的值
+                var textContainer = document.getElementById('purposeContainer');
+                purposeContainer.purposetContent = purpose;
+            </script>
+        </div>
+
+        <!-- 评论内容 -->
+        <div id="content">
+            <div id="commentsContainer">
+                <ul id="comments">
+                    <li>
+                        <br>你的评论获得的点赞的数量为<span style="color: red;">78</span>,</li>
+                    <li>并且获得了<span style="color: red;">19</span>条再评论，</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 继续按钮 -->
+    <button id="continueButton" onclick="goToNextPage()">继续</button>
+
+    <script>
+        function goToNextPage() {
+            // 跳转到下一个页面
+            window.location.href = "DGJW41.html";
+        }
+    </script>
+</body>
+</html>
